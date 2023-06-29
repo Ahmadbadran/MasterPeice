@@ -1,11 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Homepage from "../HomePage";
-import Homepage2 from "../HomePage2";
-import Homepage3 from "../HomePage3";
 import Homepage4 from "../HomePage4";
-import Homepage5 from "../HomePage5";
+
 import AboutPage from "../AboutPage";
 import ServicePage from "../ServicePage";
 import ServicePageS2 from "../ServicePageS2";
@@ -39,11 +36,9 @@ const AllRoute = () => {
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Homepage4 />} />
-          <Route path="home" element={<Homepage />} />
-          <Route path="home2" element={<Homepage2 />} />
-          <Route path="home3" element={<Homepage3 />} />
+
           <Route path="home4" element={<Homepage4 />} />
-          <Route path="home5" element={<Homepage5 />} />
+
           <Route path="about" element={<AboutPage />} />
           <Route path="project-single/:id" element={<ProjectSinglePage />} />
           <Route path="service-single/:id" element={<ServiceSinglePage />} />

@@ -32,6 +32,11 @@ const menus = [
     title: "Contact",
     link: "/contact",
   },
+  {
+    id: 100,
+    title: "Login",
+    link: "/login",
+  },
 ];
 
 export default class MobileMenu extends Component {

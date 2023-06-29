@@ -55,11 +55,11 @@ export const cartReducer = (state = init, action) => {
 
     case REMOVE_FROM_CART:
       return {
-        cart: state.cart.filter((item) => item.id !== action.product_id),
+        cart: state.cart.filter((item) => item.id !== action.product.id),
       };
 
     case INCREMENT_QUANTITY:
-      const inc_productId = action.product_id;
+      const inc_productId = action.product.id;
       const new_cart = state.cart.reduce((cartAcc, product) => {
         if (product.id === inc_productId) {
           cartAcc.push({
@@ -74,7 +74,7 @@ export const cartReducer = (state = init, action) => {
       return { ...state, cart: new_cart };
 
     case DECREMENT_QUANTITY:
-      const decProductId = action.product_id;
+      const decProductId = action.product.id;
       const decCart = state.cart.reduce((cartAcc, product) => {
         if (product.id === decProductId) {
           cartAcc.push({

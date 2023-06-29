@@ -17,36 +17,37 @@ export const receiveProducts = (products) => ({
   products,
 });
 
-export const addToCart = (product, qty, color, size) => (dispatch) => {
+export const addToCart = (product, qty, id, color, size) => (dispatch) => {
   toast.success("Item Added to Cart");
   dispatch({
     type: types.ADD_TO_CART,
     product,
+    id,
     qty,
     color,
     size,
   });
 };
 
-export const removeFromCart = (product_id) => (dispatch) => {
-  toast.success("Item Removed from Cart");
+export const removeFromCart = (product) => (dispatch) => {
+  toast.success("Item Removed from CartS");
   dispatch({
     type: types.REMOVE_FROM_CART,
-    product_id,
+    product,
   });
 };
 
-export const incrementQuantity = (product_id) => (dispatch) => {
+export const incrementQuantity = (product) => (dispatch) => {
   dispatch({
     type: types.INCREMENT_QUANTITY,
-    product_id,
+    product,
   });
 };
 
-export const decrementQuantity = (product_id) => (dispatch) => {
+export const decrementQuantity = (product) => (dispatch) => {
   dispatch({
     type: types.DECREMENT_QUANTITY,
-    product_id,
+    product,
   });
 };
 

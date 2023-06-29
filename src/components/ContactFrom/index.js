@@ -1,133 +1,178 @@
-import React, { Component } from 'react'
-
+import React, { Component } from "react";
+import axios from "axios";
 
 class ContactForm extends Component {
+  state = {
+    name: "",
+    email: "",
+    subject: "",
+    lastname: "",
+    events: "",
+    notes: "",
+    error: {},
+  };
 
+  changeHandler = (e) => {
+    const error = this.state.error;
+    error[e.target.name] = "";
 
-    state = {
-        name: '',
-        email: '',
-        subject: '',
-        lastname: '',
-        events: '',
-        notes: '',
-        error: {}
+    this.setState({
+      [e.target.name]: e.target.value,
+      error,
+    });
+  };
+
+  submitHandler = (e) => {
+    e.preventDefault();
+
+    const { name, email, subject, lastname, events, notes, error } = this.state;
+
+    if (name === "") {
+      error.name = "Please enter your name";
+    }
+    if (email === "") {
+      error.email = "Please enter your email";
+    }
+    if (subject === "") {
+      error.subject = "Please enter your subject";
+    }
+    if (lastname === "") {
+      error.lastname = "Please enter your Lastname";
+    }
+    if (events === "") {
+      error.events = "Select your event list";
+    }
+    if (notes === "") {
+      error.notes = "Please enter your note";
     }
 
-
-    changeHandler = (e) => {
-        const error = this.state.error;
-        error[e.target.name] = ''
-
-        this.setState({
-            [e.target.name]: e.target.value,
-            error
+    if (
+      error.name === "" &&
+      error.email === "" &&
+      error.subject === "" &&
+      error.lastname === "" &&
+      error.events === "" &&
+      error.notes === ""
+    ) {
+      // Send the form data to the server
+      axios
+        .post("http://localhost:8800/api/contacts", {
+          name,
+          email,
+          subject,
+          lastname,
+          events,
+          notes,
         })
+        .then((response) => {
+          // Handle successful form submission
+          console.log("Form submitted successfully");
+          // Reset the form fields
+          this.setState({
+            name: "",
+            email: "",
+            subject: "",
+            lastname: "",
+            events: "",
+            notes: "",
+            error: {},
+          });
+        })
+        .catch((error) => {
+          // Handle form submission error
+          console.error("Form submission error:", error);
+        });
     }
 
-    subimtHandler = (e) => {
-        e.preventDefault();
+    this.setState({ error });
+  };
 
-        const { name,
-            email,
-            subject,
-            lastname,
-            events,
-            notes, error } = this.state;
+  render() {
+    const { name, email, subject, lastname, error } = this.state;
 
-        if (name === '') {
-            error.name = "Please enter your name";
-        }
-        if (email === '') {
-            error.email = "Please enter your email";
-        }
-        if (subject === '') {
-            error.subject = "Please enter your subject";
-        }
-        if (lastname === '') {
-            error.lastname = "Please enter your Lastname";
-        }
-        if (events === '') {
-            error.events = "Select your event list";
-        }
-        if (notes === '') {
-            error.notes = "Please enter your note";
-        }
-
-
-        if (error) {
-            this.setState({
-                error
-            })
-        }
-        if (error.name === '' && error.email === '' && error.email === '' && error.lastname === '' && error.subject === '' && error.events === '' && error.notes === '') {
-            this.setState({
-                name: '',
-                email: '',
-                subject: '',
-                events: '',
-                notes: '',
-                error: {}
-            })
-        }
-    }
-
-    render(){
-        const { name,
-            email,
-            subject,
-            lastname,
-            error } = this.state;
-
-        return(
-            <form onSubmit={this.subimtHandler} className="form">
-                <div className="row justify-content-center">
-                    <div className="col-lg-6 col-md-6 col-12">
-                        <div className="form-field">
-                            <input value={name} onChange={this.changeHandler} type="text" name="name" placeholder="Name"/>
-                            <p>{error.name ? error.name : ''}</p>
-                        </div>
-                    </div>
-                    <div className="col-lg-6 col-md-6 col-12">
-                        <div className="form-field">
-                            <input value={lastname} onChange={this.changeHandler} type="text" name="lastname" placeholder="Lastname"/>
-                            <p>{error.lastname ? error.lastname : ''}</p>
-                        </div>
-                    </div>
-                    <div className="col-lg-6 col-md-6 col-12">
-                        <div className="form-field">
-                            <input onChange={this.changeHandler} value={email} type="email" name="email" placeholder="Email"/>
-                            <p>{error.email ? error.email : ''}</p>
-                        </div>
-                    </div>
-                    <div className="col-lg-6 col-md-6 col-12">
-                        <div className="form-field">
-                            <select className="form-control" onChange={this.changeHandler} value={subject} type="text" name="subject">
-                                <option >Service</option>
-                                <option>Architecture</option>
-                                <option>The Rehearsal Dinner</option>
-                                <option>The Afterparty</option>
-                                <option>Videographers</option>
-                                <option>Perfect Cake</option>
-                                <option>All Of The Above</option>
-                            </select>
-                            <p>{error.subject ? error.subject : ''}</p>
-                        </div>
-                    </div>
-                    <div className="col-lg-12">
-                        <div className="form-field">
-                            <textarea name="message" placeholder="Message"></textarea>
-                        </div>
-                    </div>
-                    <div className="col-lg-12">
-                        <div className="form-submit">
-                            <button type="submit" className="theme-btn">Send Message</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        )
-    }
-
+    return (
+      <form onSubmit={this.submitHandler} className="form">
+        <div className="row justify-content-center">
+          <div className="col-lg-6 col-md-6 col-12">
+            <div className="form-field">
+              <input
+                value={name}
+                onChange={this.changeHandler}
+                type="text"
+                name="name"
+                placeholder="Name"
+              />
+              <p>{error.name ? error.name : ""}</p>
+            </div>
+          </div>
+          <div className="col-lg-6 col-md-6 col-12">
+            <div className="form-field">
+              <input
+                value={lastname}
+                onChange={this.changeHandler}
+                type="text"
+                name="lastname"
+                placeholder="Lastname"
+              />
+              <p>{error.lastname ? error.lastname : ""}</p>
+            </div>
+          </div>
+          <div className="col-lg-6 col-md-6 col-12">
+            <div className="form-field">
+              <input
+                onChange={this.changeHandler}
+                value={email}
+                type="email"
+                name="email"
+                placeholder="Email"
+              />
+              <p>{error.email ? error.email : ""}</p>
+            </div>
+          </div>
+          <div className="col-lg-6 col-md-6 col-12">
+            <div className="form-field">
+              <select
+                className="form-control"
+                onChange={this.changeHandler}
+                value={subject}
+                type="text"
+                name="subject"
+              >
+                <option>Service</option>
+                <option>Architecture</option>
+                <option>The Rehearsal Dinner</option>
+                <option>The Afterparty</option>
+                <option>Videographers</option>
+                <option>Perfect Cake</option>
+                <option>All Of The Above</option>
+              </select>
+              <p>{error.subject ? error.subject : ""}</p>
+            </div>
+          </div>
+          <div className="col-lg-12">
+            <div className="form-field">
+              <textarea
+                name="notes"
+                onChange={this.changeHandler}
+                placeholder="Message"
+              ></textarea>
+            </div>
+          </div>
+          <div className="col-lg-12">
+            <div className="form-submit">
+              <button
+                type="submit"
+                className="theme-btn"
+                onClick={this.submitHandler} // Add onClick event handler
+              >
+                Send Message
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    );
+  }
 }
-export default  ContactForm;
+
+export default ContactForm;

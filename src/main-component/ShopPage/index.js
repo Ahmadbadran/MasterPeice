@@ -1,22 +1,34 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PageTitle from "../../components/pagetitle";
 import Scrollbar from "../../components/scrollbar";
 import { addToCart } from "../../store/actions/action";
-import api from "../../api";
+import axios from "axios";
 import Navbar from "../../components/Navbar";
 import Logo from "../../images/logo.svg";
 import Footer from "../../components/footer";
 import Shop from "../../components/Shop";
 
 const ShopPage = ({ addToCart }) => {
-  const productsArray = api();
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get("http://localhost:8800/api/products");
+      const data = response.data;
+      setProducts(data);
+    } catch (error) {
+      console.log("Failed to fetch products", error);
+    }
+  };
 
   const addToCartProduct = (product, qty = 1) => {
     addToCart(product, qty);
   };
-
-  const products = productsArray;
 
   return (
     <Fragment>

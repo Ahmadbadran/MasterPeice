@@ -52,5 +52,51 @@
     "delPrice": "600.00",
     "brand":"Humanscale",
     "size":"Xl"
+  },
+  {
+    "id": 7,
+    "proImg": "/product/6.jpg",
+    "title": "Wood Annabel Chair",
+    "price": "548.00",
+    "delPrice": "600.00",
+    "brand":"Humanscale",
+    "size":"Xl"
+  }
+  ,
+  {
+    "id": 8,
+    "proImg": "/product/6.jpg",
+    "title": "Wood Annabel Chair",
+    "price": "548.00",
+    "delPrice": "600.00",
+    "brand":"Humanscale",
+    "size":"Xl"
+  },
+  {
+    "id": 9,
+    "proImg": "/product/6.jpg",
+    "title": "Wood Annabel Chair",
+    "price": "548.00",
+    "delPrice": "600.00",
+    "brand":"Humanscale",
+    "size":"Xl"
+  },
+  {
+    "id": 10,
+    "proImg": "/product/6.jpg",
+    "title": "Wood Annabel Chair",
+    "price": "548.00",
+    "delPrice": "600.00",
+    "brand":"Humanscale",
+    "size":"Xl"
+  },
+  {
+    "id": 11,
+    "proImg": "/product/6.jpg",
+    "title": "Wood Annabel Chair",
+    "price": "548.00",
+    "delPrice": "600.00",
+    "brand":"Humanscale",
+    "size":"Xl"
   }
 ]

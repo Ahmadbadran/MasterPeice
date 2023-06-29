@@ -1,133 +1,157 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import SimpleReactValidator from "simple-react-validator";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import "./style.scss";
 
-import './style.scss';
+const LoginPage = () => {
+  const push = useNavigate();
 
+  const [formValues, setFormValues] = useState({
+    email: "",
+    password: "",
+    remember: true,
+  });
 
+  const validator = new SimpleReactValidator({
+    className: "errorMessage",
+  });
 
-const LoginPage = (props) => {
+  const handleInputChange = (e) => {
+    setFormValues({ ...formValues, [e.target.name]: e.target.value });
+    validator.showMessages();
+  };
 
-    const push = useNavigate()
+  const handleRememberToggle = () => {
+    setFormValues({ ...formValues, remember: !formValues.remember });
+  };
 
-    const [value, setValue] = useState({
-        email: 'user@gmail.com',
-        password: '123456',
-        remember: false,
-    });
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    const changeHandler = (e) => {
-        setValue({...value, [e.target.name]: e.target.value});
-        validator.showMessages();
-    };
+    if (validator.allValid()) {
+      setFormValues({
+        email: formValues.email,
+        password: formValues.password,
+      });
+      validator.hideMessages();
+      console.log(formValues);
 
-    const rememberHandler = () => {
-        setValue({...value, remember: !value.remember});
-    };
+      const { email, password } = formValues;
 
-    const [validator] = React.useState(new SimpleReactValidator({
-        className: 'errorMessage'
-    }));
+      // if (email.match(userRegex)) {
+      // Use Axios to make a POST request to your endpoint
+      axios
+        .post("http://localhost:8800/api/auth/login", {
+          email,
+          password,
+        })
+        .then((response) => {
+          console.log("reach");
+          // Handle successful login
+          toast.success("You have successfully logged in to Arkio!");
+          push("/home4");
+        })
+        .catch((error) => {
+          // Handle login error
+          toast.error("Login failed. Please try again.");
+        });
+    } else {
+      validator.showMessages();
+      toast.error("Empty fields are not allowed!");
+    }
+  };
 
-
-
-    const submitForm = (e) => {
-        e.preventDefault();
-        if (validator.allValid()) {
-            setValue({
-                email: '',
-                password: '',
-                remember: false
-            });
-            validator.hideMessages();
-
-            const userRegex = /^user+.*/gm;
-            const email = value.email;
-
-            if (email.match(userRegex)) {
-                toast.success('You successfully Login on Arkio !');
-                push('/home');
-            }
-        } else {
-            validator.showMessages();
-            toast.error('Empty field is not allowed!');
-        }
-    };
-    return (
-        <Grid className="loginWrapper">
-            <Grid className="loginForm">
-                <h2>Sign In</h2>
-                <p>Sign in to your account</p>
-                <form onSubmit={submitForm}>
-                    <Grid container spacing={3}>
-                        <Grid item xs={12}>
-                            <TextField
-                                className="inputOutline"
-                                fullWidth
-                                placeholder="E-mail"
-                                value={value.email}
-                                variant="outlined"
-                                name="email"
-                                label="E-mail"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                onBlur={(e) => changeHandler(e)}
-                                onChange={(e) => changeHandler(e)}
-                            />
-                            {validator.message('email', value.email, 'required|email')}
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                className="inputOutline"
-                                fullWidth
-                                placeholder="Password"
-                                value={value.password}
-                                variant="outlined"
-                                name="password"
-                                type="password"
-                                label="Password"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                onBlur={(e) => changeHandler(e)}
-                                onChange={(e) => changeHandler(e)}
-                            />
-                            {validator.message('password', value.password, 'required')}
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Grid className="formAction">
-                                <FormControlLabel
-                                    control={<Checkbox checked={value.remember} onChange={rememberHandler}/>}
-                                    label="Remember Me"
-                                />
-                                <Link to="/forgot-password">Forgot Password?</Link>
-                            </Grid>
-                            <Grid className="formFooter">
-                                <Button fullWidth className="cBtnTheme" type="submit">Login</Button>
-                            </Grid>
-                            <Grid className="loginWithSocial">
-                                <Button className="facebook"><i className="fa fa-facebook"></i></Button>
-                                <Button className="twitter"><i className="fa fa-twitter"></i></Button>
-                                <Button className="linkedin"><i className="fa fa-linkedin"></i></Button>
-                            </Grid>
-                            <p className="noteHelp">Don't have an account? <Link to="/register">Create free account</Link>
-                            </p>
-                        </Grid>
-                    </Grid>
-                </form>
-                <div className="shape-img">
-                    <i className="fi flaticon-honeycomb"></i>
-                </div>
+  return (
+    <Grid className="loginWrapper">
+      <Grid className="loginForm">
+        <h2>Sign In</h2>
+        <p>Sign in to your account</p>
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <TextField
+                className="inputOutline"
+                fullWidth
+                placeholder="E-mail"
+                value={formValues.email}
+                variant="outlined"
+                name="email"
+                label="E-mail"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onBlur={handleInputChange}
+                onChange={handleInputChange}
+              />
+              {validator.message("email", formValues.email, "required|email")}
             </Grid>
-        </Grid>
-    )
+            <Grid item xs={12}>
+              <TextField
+                className="inputOutline"
+                fullWidth
+                placeholder="Password"
+                value={formValues.password}
+                variant="outlined"
+                name="password"
+                type="password"
+                label="Password"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onBlur={handleInputChange}
+                onChange={handleInputChange}
+              />
+              {validator.message("password", formValues.password, "required")}
+            </Grid>
+            <Grid item xs={12}>
+              <Grid className="formAction">
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={formValues.remember}
+                      onChange={handleRememberToggle}
+                    />
+                  }
+                  label="Remember Me"
+                />
+                <Link to="/forgot-password">Forgot Password?</Link>
+              </Grid>
+              <Grid className="formFooter">
+                <Button fullWidth className="cBtnTheme" type="submit">
+                  Login
+                </Button>
+              </Grid>
+              <Grid className="loginWithSocial">
+                <Button className="facebook">
+                  <i className="fa fa-facebook"></i>
+                </Button>
+                <Button className="twitter">
+                  <i className="fa fa-twitter"></i>
+                </Button>
+                <Button className="linkedin">
+                  <i className="fa fa-linkedin"></i>
+                </Button>
+              </Grid>
+              <p className="noteHelp">
+                Don't have an account?{" "}
+                <Link to="/register">Create a free account</Link>
+              </p>
+            </Grid>
+          </Grid>
+        </form>
+        <div className="shape-img">
+          <i className="fi flaticon-honeycomb"></i>
+        </div>
+      </Grid>
+    </Grid>
+  );
 };
 
 export default LoginPage;

@@ -22,7 +22,7 @@ const Shop = ({ products, addToCartProduct }) => {
                       <h3>
                         <Link
                           onClick={ClickHandler}
-                          to={`/product-single/${product.id}`}
+                          to={`/product-single/${product._id}`}
                         >
                           {product.title}
                         </Link>

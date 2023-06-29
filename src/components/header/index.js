@@ -162,7 +162,7 @@ const Header = (props) => {
                                 <span className="mini-cart-item-quantity">
                                   <button
                                     onClick={() =>
-                                      props.removeFromCart(catItem.id)
+                                      props.removeFromCart(catItem)
                                     }
                                     className="btn btn-sm btn-danger"
                                   >
