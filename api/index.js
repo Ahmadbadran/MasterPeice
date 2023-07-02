@@ -6,6 +6,8 @@ import usersRoute from "./routes/users.js";
 import hotelsRoute from "./routes/hotels.js";
 import roomsRoute from "./routes/rooms.js";
 import productsRoute from "./routes/products.js";
+import projectsRoute from "./routes/projects.js";
+import reviewsRoute from "./routes/reviews.js";
 import formsRoute from "./routes/forms.js";
 import contactRoute from "./routes/contact.js";
 import cookieParser from "cookie-parser";
@@ -34,6 +36,8 @@ app.use(express.json());
 
 app.use("/api/products", productsRoute);
 app.use("/api/forms", formsRoute);
+app.use("/api/projects", projectsRoute);
+app.use("/api/reviews", reviewsRoute);
 app.use("/api/contacts", contactRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);

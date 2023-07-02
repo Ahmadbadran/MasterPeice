@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
   TabContent,
   TabPane,
@@ -10,18 +11,44 @@ import {
 } from "reactstrap";
 import classnames from "classnames";
 
-import rv1 from "../../images/shop/shop-single/review/img-1.jpg";
+import rv1 from "../../images/360_F_165639425_kRh61s497pV7IOPAjwjme1btB8ICkV0L.jpg";
 import rv2 from "../../images/shop/shop-single/review/img-2.jpg";
 
 const ProductTabs = (props) => {
   const [activeTab, setActiveTab] = useState("1");
+  const [reviews, setReviews] = useState([]);
+  const [newReview, setNewReview] = useState("");
 
-  const toggle = (tab) => {
-    if (activeTab !== tab) setActiveTab(tab);
-  };
+  useEffect(() => {
+    axios
+      .get("http://localhost:8800/api/reviews")
+      .then((response) => {
+        setReviews(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching reviews:", error);
+      });
+  }, []);
 
-  const SubmitHandler = (e) => {
-    e.preventDefault();
+  const handleSubmitReview = (event) => {
+    event.preventDefault();
+
+    const reviewData = {
+      name: event.target.elements.name.value,
+      email: event.target.elements.email.value,
+      rating: event.target.elements.rating.value,
+      comment: event.target.elements.comment.value,
+    };
+
+    axios
+      .post("http://localhost:8800/api/reviews", reviewData)
+      .then((response) => {
+        setReviews([...reviews, response.data]);
+        event.target.reset();
+      })
+      .catch((error) => {
+        console.error("Error submitting review:", error);
+      });
   };
 
   return (
@@ -33,7 +60,7 @@ const ProductTabs = (props) => {
               <NavLink
                 className={classnames({ active: activeTab === "1" })}
                 onClick={() => {
-                  toggle("1");
+                  setActiveTab("1");
                 }}
               >
                 Description
@@ -43,7 +70,7 @@ const ProductTabs = (props) => {
               <NavLink
                 className={classnames({ active: activeTab === "2" })}
                 onClick={() => {
-                  toggle("2");
+                  setActiveTab("2");
                 }}
               >
                 Review
@@ -79,38 +106,37 @@ const ProductTabs = (props) => {
             <TabPane tabId="2">
               <div className="row">
                 <div className="col col-lg-10 col-12">
-                  <div className="client-rv">
-                    <div className="client-pic">
-                      <img src={rv1} alt="" />
-                    </div>
-                    <div className="details">
-                      <div className="name-rating-time">
-                        <div className="name-rating">
-                          <div>
-                            <h4>Jenefar Willium</h4>
-                          </div>
-                          <div className="product-rt">
-                            <span>25 Sep 2021</span>
-                            <div className="rating">
-                              <i className="fa fa-star"></i>
-                              <i className="fa fa-star"></i>
-                              <i className="fa fa-star"></i>
-                              <i className="fa fa-star"></i>
-                              <i className="fa fa-star-o"></i>
+                  {reviews.map((review) => (
+                    <div className="client-rv" key={review._id}>
+                      <div className="client-pic">
+                        <img src={rv1} alt="" />
+                      </div>
+                      <div className="details">
+                        <div className="name-rating-time">
+                          <div className="name-rating">
+                            <div>
+                              <h4>{review.name}</h4>
+                            </div>
+                            <div className="product-rt">
+                              <span>{review.date}</span>
+                              <div className="rating">
+                                {Array(review.rating).fill(
+                                  <i className="fa fa-star"></i>
+                                )}
+                                {Array(5 - review.rating).fill(
+                                  <i className="fa fa-star-o"></i>
+                                )}
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="review-body">
-                        <p>
-                          There are many variations of passages of Lorem Ipsum
-                          available, but the majority have suffered alteration
-                          in some form, by injected humour, or randomised words
-                          which don't look.
-                        </p>
+                        <div className="review-body">
+                          <p>{review.comment}</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  ))}
+
                   <div className="client-rv">
                     <div className="client-pic">
                       <img src={rv2} alt="" />
@@ -152,34 +178,34 @@ const ProductTabs = (props) => {
                       Your email address will not be published. Required fields
                       are marked *
                     </p>
-                    <form onSubmit={SubmitHandler}>
+                    <form onSubmit={handleSubmitReview}>
                       <div className="give-rat-sec">
                         <p>Your rating *</p>
                         <div className="give-rating">
                           <label>
-                            <input type="radio" name="stars" value="1" />
+                            <input type="radio" name="rating" value="1" />
                             <span className="icon">★</span>
                           </label>
                           <label>
-                            <input type="radio" name="stars" value="2" />
-                            <span className="icon">★</span>
-                            <span className="icon">★</span>
-                          </label>
-                          <label>
-                            <input type="radio" name="stars" value="3" />
-                            <span className="icon">★</span>
+                            <input type="radio" name="rating" value="2" />
                             <span className="icon">★</span>
                             <span className="icon">★</span>
                           </label>
                           <label>
-                            <input type="radio" name="stars" value="4" />
-                            <span className="icon">★</span>
+                            <input type="radio" name="rating" value="3" />
                             <span className="icon">★</span>
                             <span className="icon">★</span>
                             <span className="icon">★</span>
                           </label>
                           <label>
-                            <input type="radio" name="stars" value="5" />
+                            <input type="radio" name="rating" value="4" />
+                            <span className="icon">★</span>
+                            <span className="icon">★</span>
+                            <span className="icon">★</span>
+                            <span className="icon">★</span>
+                          </label>
+                          <label>
+                            <input type="radio" name="rating" value="5" />
                             <span className="icon">★</span>
                             <span className="icon">★</span>
                             <span className="icon">★</span>
@@ -193,6 +219,7 @@ const ProductTabs = (props) => {
                           type="text"
                           className="form-control"
                           placeholder="Name *"
+                          name="name"
                           required
                         />
                       </div>
@@ -201,6 +228,7 @@ const ProductTabs = (props) => {
                           type="email"
                           className="form-control"
                           placeholder="Email *"
+                          name="email"
                           required
                         />
                       </div>
@@ -208,6 +236,7 @@ const ProductTabs = (props) => {
                         <textarea
                           className="form-control"
                           placeholder="Review *"
+                          name="comment"
                         ></textarea>
                       </div>
                       <div className="rating-wrapper">

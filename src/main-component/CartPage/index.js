@@ -121,9 +121,6 @@ const CartPage = (props) => {
                           Continue Shopping{" "}
                         </Link>
                       </li>
-                      <li>
-                        <button type="submit">Update Cart</button>
-                      </li>
                     </ul>
                   </div>
                   <div className="cart-product-list">
