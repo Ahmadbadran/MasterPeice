@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# Architecture & Furniture Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to our Architecture & Furniture website! This platform is designed to showcase our comprehensive range of architectural services and provide a curated selection of high-quality furniture for your interior design needs. We are dedicated to creating stunning spaces that blend functionality, aesthetics, and innovation.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Introduction](#introduction)
 
-### `npm start`
+- [Services](#services)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [Furniture Collection](#furniture-collection)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- [Contact](#contact)
 
-### `npm test`
+## Introduction
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+At our Architecture & Furniture company, we believe in the power of exceptional design to transform spaces and enhance the lives of our clients. With a team of talented architects and interior designers, we offer a diverse range of architectural services tailored to meet your specific requirements. Our commitment to excellence, attention to detail, and passion for innovation drive us to create remarkable architectural solutions.
 
-### `npm run build`
+## Services
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+We provide a comprehensive range of architectural services, including:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1\. **Residential Architecture:** We specialize in designing comfortable, functional, and aesthetically pleasing homes that reflect your unique style and preferences.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2\. **Commercial Architecture:** Our team is experienced in creating impressive commercial spaces that optimize workflow, inspire productivity, and leave a lasting impression on clients and employees.
 
-### `npm run eject`
+3\. **Interior Design:** We offer expert interior design services that integrate seamlessly with the architecture, creating harmonious and captivating spaces.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4\. **Renovations and Remodeling:** Whether it's a small renovation or a complete remodeling project, our architects have the expertise to transform existing spaces into something extraordinary.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+5\. **Landscape Architecture:** We extend our design expertise to the outdoors, creating captivating landscapes that complement and enhance the overall architectural vision.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Furniture Collection
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+In addition to our architectural services, we also offer a carefully curated collection of furniture to complement your design project. Our furniture collection features a blend of contemporary and classic pieces, sourced from renowned designers and manufacturers. From comfortable sofas and stylish dining sets to elegant lighting fixtures and decorative accessories, we strive to provide furniture that perfectly complements your space and enhances your overall design aesthetic.
 
-## Learn More
+Explore our furniture collection on our website, where you can browse through various categories, view detailed product descriptions, and make secure online purchases. We ensure that each piece of furniture meets the highest standards of quality, craftsmanship, and durability.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Contact
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+We would love to discuss your architectural needs or assist you in selecting the perfect furniture pieces for your space. Please feel free to contact us through the following channels:
 
-### Code Splitting
+- **Phone:** [+1-XXX-XXX-XXXX]
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **Email:** [info@architectureandfurniture.com]
 
-### Analyzing the Bundle Size
+- **Website:** [www.architectureandfurniture.com/contact](https://www.architectureandfurniture.com/contact)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Our dedicated team of professionals is eager to answer your queries, provide expert advice, and guide you through the process of creating exceptional architectural spaces and finding the ideal furniture pieces to bring your vision to life.
 
-### Making a Progressive Web App
+Thank you for choosing Architecture & Furniture -- we look forward to collaborating with you and exceeding your expectations!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Figma Link [https://www.figma.com/file/CnzZAVV6fEPRRpH843A9aR/Arkio?type=design&node-id=0%3A1&mode=design&t=Jn8yScGpeKY5bSpM-1]
